@@ -25,6 +25,19 @@ func (s *Selection) EachWithBreak(f func(int, *Selection) bool) *Selection {
 	return s
 }
 
+// EachWithBreakOn iterates over a Selection object, executing a function for each
+// matched element. It is identical to EachWithBreak except that it will return the 
+// Selection that was broken on, or nil if not broken. 
+func (s *Selection) EachWithBreak(f func(int, *Selection) bool) *Selection {
+	for i, n := range s.Nodes {
+        var el *Selection = newSingleSelection(n, s.document)
+		if !f(i,el) {
+			return el
+		}
+	}
+	return nil
+}
+
 // Map passes each element in the current matched set through a function,
 // producing a slice of string holding the returned values. The function
 // f is called for each element in the selection with the index of the
