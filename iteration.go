@@ -26,12 +26,12 @@ func (s *Selection) EachWithBreak(f func(int, *Selection) bool) *Selection {
 }
 
 // EachWithBreakOn iterates over a Selection object, executing a function for each
-// matched element. It is identical to EachWithBreak except that it will return the 
-// Selection that was broken on, or nil if not broken. 
+// matched element. It is identical to EachWithBreak except that it will return the
+// Selection that was broken on, or nil if not broken.
 func (s *Selection) EachWithBreak(f func(int, *Selection) bool) *Selection {
 	for i, n := range s.Nodes {
-        var el *Selection = newSingleSelection(n, s.document)
-		if !f(i,el) {
+		var el *Selection = newSingleSelection(n, s.document)
+		if !f(i, el) {
 			return el
 		}
 	}
